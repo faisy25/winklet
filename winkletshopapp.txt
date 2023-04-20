@@ -1,0 +1,11 @@
+A shop ecommerce website using MERN stack (MongoDb , Express , ReactJS, NodeJS). Features : Shopping cart, Login, Register, PayPal payment, Upload images to Cloudinary and to local disk, Searching, Sorting, Filtering, Pagination of product list  multilevel categories, Bestsellers carousel, Star rating system and reviews, Real time sales charts using SocketIO, Chat using SocketIO, React local state, Redux state, React Hooks.
+
+
+
+Steps : 
+
+.env - development to production
+Makes changes from !== to === for cloudinary.
+dot env file changes for database connection.
+
+
