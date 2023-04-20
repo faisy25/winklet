@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
         .to(targetAdminId)
         .emit("server sends message from client to admin", {
           user: socket.id,
-          message: msg
+          message: msg,
         });
     }
   });
@@ -81,18 +81,30 @@ io.on("connection", (socket) => {
     }
     socket.broadcast.emit("disconnected", {
       reason: reason,
-      socketId: socket.id
+      socketId: socket.id,
     });
   });
 });
 
 const apiRoutes = require("./routes/apiRoutes");
 
-app.get("/", (req, res, next) => {
-  res.json({ message: "API running..." });
-});
+// app.get("/", (req, res, next) => {
+//   res.json({ message: "API running..." });
+// });
 
 app.use("/api", apiRoutes);
+
+const path = require("path");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "../frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.json({ message: "API running..." });
+  });
+}
 
 app.use((error, req, res, next) => {
   if (process.env.NODE_ENV === "development") {
@@ -104,7 +116,7 @@ app.use((error, req, res, next) => {
   if (process.env.NODE_ENV === "development") {
     res.status(500).json({
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
     });
   } else {
     res.status(500).json({ message: error.message });
