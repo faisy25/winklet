@@ -395,7 +395,7 @@ const EditProductPageComponent = ({
                   multiple
                   onChange={(e) => {
                     setIsUploading("upload files in progress ...");
-                    if (process.env.NODE_ENV !== "production") {
+                    if (process.env.NODE_ENV === "production") {
                       // !== to === for production
                       uploadImagesApiRequest(e.target.files, id)
                         .then((data) => {
