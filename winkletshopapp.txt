@@ -9,3 +9,5 @@ Makes changes from !== to === for cloudinary.
 dot env file changes for database connection.
 
 
+"proxy": "http://localhost:5000",    //development
+
